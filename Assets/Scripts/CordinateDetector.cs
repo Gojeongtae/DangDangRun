@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class CordinateDetector : MonoBehaviour
 {
-    private Vector3 coordinate = Vector3.zero;
-
+    public Vector3 cordinate = Vector3.zero;
+    public Camera cam;
+    public Vector3 mousePos;
+    
     // Start is called before the first frame update
     void Start()
     {
-        coordinate = Vector3.zero;
+        cordinate = Vector3.zero;
+        cam = Camera.main;
     }
 
     // Update is called once per frame
@@ -17,8 +20,11 @@ public class CordinateDetector : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            coordinate = Input.mousePosition;
-            Debug.Log(coordinate);
+            
+                Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, cam.nearClipPlane);
+                cordinate = cam.ScreenToWorldPoint(mousePos);
+                Debug.Log(cordinate);
+                                          
         }
     }
 }
